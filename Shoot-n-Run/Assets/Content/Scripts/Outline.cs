@@ -85,12 +85,14 @@ public class Outline : MonoBehaviour
                 CombineSubmeshes(meshFilter.sharedMesh, renderer.sharedMaterials);
             }
         }
+
         foreach (var skinnedMeshRenderer in GetComponentsInChildren<SkinnedMeshRenderer>())
         {
             if (!registeredMeshes.Add(skinnedMeshRenderer.sharedMesh))
             {
                 continue;
             }
+
             skinnedMeshRenderer.sharedMesh.uv4 = new Vector2[skinnedMeshRenderer.sharedMesh.vertexCount];
             CombineSubmeshes(skinnedMeshRenderer.sharedMesh, skinnedMeshRenderer.sharedMaterials);
         }
@@ -98,7 +100,8 @@ public class Outline : MonoBehaviour
 
     private List<Vector3> SmoothNormals(Mesh mesh)
     {
-        var groups = mesh.vertices.Select((vertex, index) => new KeyValuePair<Vector3, int>(vertex, index)).GroupBy(pair => pair.Key);
+        var groups = mesh.vertices.Select((vertex, index) => new KeyValuePair<Vector3, int>(vertex, index))
+            .GroupBy(pair => pair.Key);
         var smoothNormals = new List<Vector3>(mesh.normals);
         foreach (var group in groups)
         {
@@ -106,12 +109,14 @@ public class Outline : MonoBehaviour
             {
                 continue;
             }
+
             var smoothNormal = Vector3.zero;
 
             foreach (var pair in group)
             {
                 smoothNormal += smoothNormals[pair.Value];
             }
+
             smoothNormal.Normalize();
 
             foreach (var pair in group)
@@ -119,6 +124,7 @@ public class Outline : MonoBehaviour
                 smoothNormals[pair.Value] = smoothNormal;
             }
         }
+
         return smoothNormals;
     }
 
@@ -128,10 +134,12 @@ public class Outline : MonoBehaviour
         {
             return;
         }
+
         if (mesh.subMeshCount > materials.Length)
         {
             return;
         }
+
         mesh.subMeshCount++;
         mesh.SetTriangles(mesh.triangles, mesh.subMeshCount - 1);
     }

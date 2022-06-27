@@ -20,7 +20,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Bullet bullet)|| other.TryGetComponent(out PlayerMovement player))
+        if (other.TryGetComponent(out Bullet bullet) || other.TryGetComponent(out PlayerMovement player))
             return;
         _movementDirection *= -1;
     }

@@ -16,11 +16,11 @@ public class EnemyShooting : Shooting
         Ray rayTowardsPlayer = new Ray(transform.position, direction);
         RaycastHit hit;
         Physics.Raycast(rayTowardsPlayer, out hit);
-        bool playerHit = hit.collider.gameObject.TryGetComponent(out PlayerAim player);
+        bool playerHit = hit.collider.TryGetComponent(out PlayerAim player);
         if (!playerHit)
             return;
         Bullet bullet = BulletPool.Get();
-        bullet.transform.position = Barrel.transform.position;
+        bullet.transform.position = Barrel.position;
         bullet.ShootRaycastBullet(RandomizeEnemyShot(direction));
         _canShoot = false;
         ReloadTime().Forget();

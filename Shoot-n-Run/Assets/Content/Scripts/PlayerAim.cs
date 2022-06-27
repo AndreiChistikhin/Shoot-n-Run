@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAim : MonoBehaviour
@@ -21,6 +19,6 @@ public class PlayerAim : MonoBehaviour
         _xRotation -= _mouseY;
         _yRotation += _mouseX;
         _xRotation = Mathf.Clamp(_xRotation, -90, 90);
-        transform.localEulerAngles=new Vector3(_xRotation, _yRotation, 0);
+        transform.localEulerAngles = new Vector3(_xRotation, _yRotation, 0);
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Cysharp.Threading.Tasks;
 using System.Collections;
 
 public class Bullet : MonoBehaviour
@@ -11,6 +10,7 @@ public class Bullet : MonoBehaviour
     private Camera _camera;
     private Vector3 _shootingDirection;
     private Action<Bullet> _destroyBulletAction;
+    private Coroutine _bulletCoroutine;
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
     {
         _shootingDirection = direction;
         _rb.AddForceAtPosition(direction.normalized, transform.position, ForceMode.Impulse);
-        StartCoroutine(DestroyBulletTimer());
+        _bulletCoroutine=StartCoroutine(DestroyBulletTimer());
     }
 
     private IEnumerator DestroyBulletTimer()
@@ -49,20 +49,21 @@ public class Bullet : MonoBehaviour
         if (other.TryGetComponent(out PlayerShooting player))
         {
             player.ThrowBack(_shootingDirection);
-            StopCoroutine(DestroyBulletTimer());
+            StopCoroutine(_bulletCoroutine);
             _destroyBulletAction(this);
             return;
         }
 
-        GameObject partice=Instantiate(_bulletParticles, transform.position, 
+        GameObject partice = Instantiate(_bulletParticles, transform.position,
             Quaternion.LookRotation(-_shootingDirection));
         Destroy(partice, 2);
-        if(other.TryGetComponent(out EnemyView enemy))
+        if (other.TryGetComponent(out EnemyView enemy))
         {
             enemy.DamageEnemy();
             Debug.Log("Enemy Shot");
         }
-        StopCoroutine(DestroyBulletTimer());
+
+        StopCoroutine(_bulletCoroutine);
         _destroyBulletAction(this);
     }
 }

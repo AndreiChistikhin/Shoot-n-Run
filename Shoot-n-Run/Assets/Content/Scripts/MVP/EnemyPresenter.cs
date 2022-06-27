@@ -1,12 +1,9 @@
-using System;
-using UnityEngine;
-
-public class EnemyPresenter 
+public class EnemyPresenter
 {
     private EnemyView _view;
     private EnemyModel _model;
 
-    public EnemyPresenter(EnemyView view,EnemyModel model)
+    public EnemyPresenter(EnemyView view, EnemyModel model)
     {
         _view = view;
         _model = model;

@@ -1,9 +1,8 @@
-using UnityEngine;
 using System;
 
 public class EnemyModel
 {
-    private int _health=3;
+    private int _health = 3;
 
     public event Action EnemyDied;
 

@@ -20,6 +20,7 @@ public class GameLog : MonoBehaviour
     {
         Application.logMessageReceived += WriteLog;
     }
+
     private void OnDisable()
     {
         Application.logMessageReceived -= WriteLog;
@@ -30,10 +31,10 @@ public class GameLog : MonoBehaviour
         File.WriteAllText(_fileName, string.Empty);
     }
 
-    private void WriteLog(string logString,string stackTrace,LogType type)
+    private void WriteLog(string logString, string stackTrace, LogType type)
     {
         TextWriter textwriter = new StreamWriter(_fileName, true);
-        textwriter.WriteLine($"[{ System.DateTime.Now} ] {logString}");
+        textwriter.WriteLine($"[{System.DateTime.Now} ] {logString}");
         textwriter.Close();
     }
 }

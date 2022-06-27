@@ -10,6 +10,6 @@ public class WinGameTrigger : MonoBehaviour
         if (!other.TryGetComponent(out PlayerMovement player))
             return;
         Debug.Log("Player Victory");
-        GameIsWon?.Invoke("Выиграл");
+        GameIsWon?.Invoke("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     }
 }

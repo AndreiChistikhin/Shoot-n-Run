@@ -10,6 +10,6 @@ public class GameOverTrigger : MonoBehaviour
         if (!other.TryGetComponent(out PlayerMovement player))
             return;
         Debug.Log("Player Defeat");
-        GameIsLost?.Invoke("Проиграл");
+        GameIsLost?.Invoke("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     }
 }

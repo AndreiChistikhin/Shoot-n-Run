@@ -5,14 +5,8 @@ public class EnemyHighlighter : MonoBehaviour
 {
     [SerializeField] private List<EnemyView> _enemies;
 
-    private readonly Color _normalEnemyColor=Color.red;
-    private readonly Color _highlightedEnemyColor=Color.yellow;
-    private Camera _camera;
-
-    private void Start()
-    {
-        _camera = Camera.main;
-    }
+    private readonly Color _normalEnemyColor = Color.red;
+    private readonly Color _highlightedEnemyColor = Color.yellow;
 
     private void OnEnable()
     {
@@ -29,7 +23,7 @@ public class EnemyHighlighter : MonoBehaviour
     private void UpdateHighlight(Collider hitCollider)
     {
         RemoveAllHighlight();
-        if (hitCollider == null||!hitCollider.TryGetComponent(out EnemyView highlighter))
+        if (hitCollider == null || !hitCollider.TryGetComponent(out EnemyView highlighter))
             return;
         MeshRenderer enemyMaterial = highlighter.gameObject.GetComponent<MeshRenderer>();
         HighlightEnemy(enemyMaterial);
@@ -44,7 +38,7 @@ public class EnemyHighlighter : MonoBehaviour
 
     private void RemoveAllHighlight()
     {
-        foreach(var enemy in _enemies)
+        foreach (var enemy in _enemies)
         {
             enemy.gameObject.GetComponent<MeshRenderer>().material.color = _normalEnemyColor;
         }

@@ -8,7 +8,7 @@ public class SetUp : MonoBehaviour
     private void Awake()
     {
         _presenters = new EnemyPresenter[_enemies.Length];
-        for(int i=0;i<_enemies.Length;i++)
+        for (int i = 0; i < _enemies.Length; i++)
         {
             _presenters[i] = new EnemyPresenter(_enemies[i], new EnemyModel());
         }
@@ -16,7 +16,7 @@ public class SetUp : MonoBehaviour
 
     private void OnEnable()
     {
-        foreach(var enemyPresenter in _presenters)
+        foreach (var enemyPresenter in _presenters)
         {
             enemyPresenter.Enable();
         }

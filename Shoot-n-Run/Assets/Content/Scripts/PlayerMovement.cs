@@ -10,6 +10,6 @@ public class PlayerMovement : MonoBehaviour
         if (move == Vector3.zero)
             return;
         move = transform.TransformDirection(move);
-        transform.position+=move*_speed*Time.deltaTime;
+        transform.position += move * (_speed * Time.deltaTime);
     }
 }
